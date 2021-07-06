@@ -1,0 +1,17 @@
+Vagrant.configure("2") do |config|
+  
+ 	config.vm.box = "generic/debian10"
+	
+	config.vm.network "public_network", ip: "192.168.15.50"
+	config.vm.network "private_network", ip: "10.1.1.1",
+		virtualbox_intnet: true
+
+	config.vm.provider :virtualbox do |m|
+		m.customize ["modifyvm", :id, "--name", "Debian"]
+		m.customize ["modifyvm", :id, "--memory", 2048]
+		m.customize ["modifyvm", :id, "--cpus", 2]
+		m.customize ["modifyvm", :id, "--vram", 16]
+		m.customize ["modifyvm", :id, "--vrde", "off"]
+	end
+
+end

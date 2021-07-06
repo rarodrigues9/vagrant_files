@@ -1,0 +1,14 @@
+
+frontend haproxy
+	mode tcp
+	bind 192.168.15.11:6443
+	option tcplog
+	default_backend k8s-masters
+
+backend k8s-masters
+	mode tcp
+	balance roundrobin
+	option tcp-check
+	server master1 192.168.15.111:6443 check fall 3 rise 2
+	server master2 192.168.15.112:6443 check fall 3 rise 2	
+	server master3 192.168.15.113:6443 check fall 3 rise 2
